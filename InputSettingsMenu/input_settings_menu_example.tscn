@@ -1,0 +1,379 @@
+[gd_scene load_steps=6 format=3 uid="uid://dpc41sd3en04"]
+
+[ext_resource type="Script" path="res://InputSettingsMenu/input_settings_menu_example.gd" id="1_1uo8b"]
+[ext_resource type="PackedScene" uid="uid://bv5jat57ky7yn" path="res://InputSettingsMenu/input_settings_button_kb.tscn" id="2_rwahf"]
+[ext_resource type="Script" path="res://InputSettingsMenu/action_binding_ref.gd" id="2_rxaia"]
+[ext_resource type="PackedScene" uid="uid://bsmdia63xyhds" path="res://InputSettingsMenu/input_settings_button_ms.tscn" id="3_4sp74"]
+[ext_resource type="PackedScene" uid="uid://s225alh8sif4" path="res://InputSettingsMenu/input_settings_button_ct.tscn" id="4_bvyrd"]
+
+[node name="InputSettingsMenuExample" type="Control" node_paths=PackedStringArray("all_tabs", "current_tab")]
+layout_mode = 3
+anchors_preset = 15
+anchor_right = 1.0
+anchor_bottom = 1.0
+grow_horizontal = 2
+grow_vertical = 2
+script = ExtResource("1_1uo8b")
+all_tabs = [NodePath("ScrollContainer/ButtonsAndLabels/KeyboardSettings"), NodePath("ScrollContainer/ButtonsAndLabels/MouseSettings"), NodePath("ScrollContainer/ButtonsAndLabels/ControllerSettings")]
+current_tab = NodePath("ScrollContainer/ButtonsAndLabels/KeyboardSettings")
+
+[node name="TabBar" type="TabBar" parent="."]
+layout_mode = 0
+offset_left = 64.0
+offset_right = 640.0
+offset_bottom = 40.0
+tab_alignment = 2
+tab_count = 3
+tab_0/title = "Keyboard"
+tab_1/title = "Mouse"
+tab_2/title = "Controller"
+
+[node name="ScrollContainer" type="ScrollContainer" parent="."]
+layout_mode = 0
+offset_top = 40.0
+offset_right = 832.0
+offset_bottom = 488.0
+
+[node name="ButtonsAndLabels" type="ColorRect" parent="ScrollContainer"]
+custom_minimum_size = Vector2(826, 534)
+layout_mode = 2
+color = Color(0.172549, 0.172549, 0.172549, 0.717647)
+
+[node name="ActionLabels" type="ColorRect" parent="ScrollContainer/ButtonsAndLabels"]
+layout_mode = 0
+offset_right = 136.0
+offset_bottom = 536.0
+color = Color(0.133333, 0.164706, 0.184314, 0.717647)
+
+[node name="forward" type="Label" parent="ScrollContainer/ButtonsAndLabels/ActionLabels" node_paths=PackedStringArray("kb_binding_buttons", "ms_binding_buttons", "ct_binding_buttons")]
+layout_mode = 0
+offset_top = 24.0
+offset_right = 128.0
+offset_bottom = 72.0
+text = "forward"
+horizontal_alignment = 1
+vertical_alignment = 1
+script = ExtResource("2_rxaia")
+action_name = &"forward"
+kb_binding_buttons = [NodePath("../../KeyboardSettings/Kb1"), NodePath("../../KeyboardSettings/Kb2"), NodePath("../../KeyboardSettings/Kb3")]
+ms_binding_buttons = [NodePath("../../MouseSettings/Ms1"), NodePath("../../MouseSettings/Ms2"), NodePath("../../MouseSettings/Ms3")]
+ct_binding_buttons = [NodePath("../../ControllerSettings/Ct1"), NodePath("../../ControllerSettings/Ct2"), NodePath("../../ControllerSettings/Ct3")]
+
+[node name="backward" type="Label" parent="ScrollContainer/ButtonsAndLabels/ActionLabels" node_paths=PackedStringArray("kb_binding_buttons", "ms_binding_buttons", "ct_binding_buttons")]
+layout_mode = 0
+offset_top = 112.0
+offset_right = 128.0
+offset_bottom = 160.0
+text = "backward"
+horizontal_alignment = 1
+vertical_alignment = 1
+script = ExtResource("2_rxaia")
+action_name = &"backward"
+kb_binding_buttons = [NodePath("../../KeyboardSettings/Kb4"), NodePath("../../KeyboardSettings/Kb5"), NodePath("../../KeyboardSettings/Kb6")]
+ms_binding_buttons = [NodePath("../../MouseSettings/Ms4"), NodePath("../../MouseSettings/Ms5"), NodePath("../../MouseSettings/Ms6")]
+ct_binding_buttons = [NodePath("../../ControllerSettings/Ct4"), NodePath("../../ControllerSettings/Ct5"), NodePath("../../ControllerSettings/Ct6")]
+
+[node name="left" type="Label" parent="ScrollContainer/ButtonsAndLabels/ActionLabels" node_paths=PackedStringArray("kb_binding_buttons", "ms_binding_buttons", "ct_binding_buttons")]
+layout_mode = 0
+offset_top = 200.0
+offset_right = 128.0
+offset_bottom = 248.0
+text = "left"
+horizontal_alignment = 1
+vertical_alignment = 1
+script = ExtResource("2_rxaia")
+action_name = &"left"
+kb_binding_buttons = [NodePath("../../KeyboardSettings/Kb7"), NodePath("../../KeyboardSettings/Kb8"), NodePath("../../KeyboardSettings/Kb9")]
+ms_binding_buttons = [NodePath("../../MouseSettings/Ms7"), NodePath("../../MouseSettings/Ms8"), NodePath("../../MouseSettings/Ms9")]
+ct_binding_buttons = [NodePath("../../ControllerSettings/Ct7"), NodePath("../../ControllerSettings/Ct8"), NodePath("../../ControllerSettings/Ct9")]
+
+[node name="right" type="Label" parent="ScrollContainer/ButtonsAndLabels/ActionLabels" node_paths=PackedStringArray("kb_binding_buttons", "ms_binding_buttons", "ct_binding_buttons")]
+layout_mode = 0
+offset_top = 288.0
+offset_right = 128.0
+offset_bottom = 336.0
+text = "right"
+horizontal_alignment = 1
+vertical_alignment = 1
+script = ExtResource("2_rxaia")
+action_name = &"right"
+kb_binding_buttons = [NodePath("../../KeyboardSettings/Kb10"), NodePath("../../KeyboardSettings/Kb11"), NodePath("../../KeyboardSettings/Kb12")]
+ms_binding_buttons = [NodePath("../../MouseSettings/Ms10"), NodePath("../../MouseSettings/Ms11"), NodePath("../../MouseSettings/Ms12")]
+ct_binding_buttons = [NodePath("../../ControllerSettings/Ct10"), NodePath("../../ControllerSettings/Ct11"), NodePath("../../ControllerSettings/Ct12")]
+
+[node name="KeyboardSettings" type="ColorRect" parent="ScrollContainer/ButtonsAndLabels"]
+layout_mode = 0
+offset_left = 136.0
+offset_right = 824.0
+offset_bottom = 536.0
+color = Color(0.176471, 0.160784, 0.0627451, 0.717647)
+
+[node name="Kb1" parent="ScrollContainer/ButtonsAndLabels/KeyboardSettings" instance=ExtResource("2_rwahf")]
+layout_mode = 0
+offset_left = 24.0
+offset_top = 24.0
+offset_right = 216.0
+offset_bottom = 72.0
+
+[node name="Kb2" parent="ScrollContainer/ButtonsAndLabels/KeyboardSettings" instance=ExtResource("2_rwahf")]
+layout_mode = 0
+offset_left = 240.0
+offset_top = 24.0
+offset_right = 432.0
+offset_bottom = 72.0
+
+[node name="Kb3" parent="ScrollContainer/ButtonsAndLabels/KeyboardSettings" instance=ExtResource("2_rwahf")]
+layout_mode = 0
+offset_left = 456.0
+offset_top = 24.0
+offset_right = 648.0
+offset_bottom = 72.0
+
+[node name="Kb4" parent="ScrollContainer/ButtonsAndLabels/KeyboardSettings" instance=ExtResource("2_rwahf")]
+layout_mode = 0
+offset_left = 24.0
+offset_top = 112.0
+offset_right = 216.0
+offset_bottom = 160.0
+
+[node name="Kb5" parent="ScrollContainer/ButtonsAndLabels/KeyboardSettings" instance=ExtResource("2_rwahf")]
+layout_mode = 0
+offset_left = 240.0
+offset_top = 112.0
+offset_right = 432.0
+offset_bottom = 160.0
+
+[node name="Kb6" parent="ScrollContainer/ButtonsAndLabels/KeyboardSettings" instance=ExtResource("2_rwahf")]
+layout_mode = 0
+offset_left = 456.0
+offset_top = 112.0
+offset_right = 648.0
+offset_bottom = 160.0
+
+[node name="Kb7" parent="ScrollContainer/ButtonsAndLabels/KeyboardSettings" instance=ExtResource("2_rwahf")]
+layout_mode = 0
+offset_left = 24.0
+offset_top = 200.0
+offset_right = 216.0
+offset_bottom = 248.0
+
+[node name="Kb8" parent="ScrollContainer/ButtonsAndLabels/KeyboardSettings" instance=ExtResource("2_rwahf")]
+layout_mode = 0
+offset_left = 240.0
+offset_top = 200.0
+offset_right = 432.0
+offset_bottom = 248.0
+
+[node name="Kb9" parent="ScrollContainer/ButtonsAndLabels/KeyboardSettings" instance=ExtResource("2_rwahf")]
+layout_mode = 0
+offset_left = 456.0
+offset_top = 200.0
+offset_right = 648.0
+offset_bottom = 248.0
+
+[node name="Kb10" parent="ScrollContainer/ButtonsAndLabels/KeyboardSettings" instance=ExtResource("2_rwahf")]
+layout_mode = 0
+offset_left = 24.0
+offset_top = 288.0
+offset_right = 216.0
+offset_bottom = 336.0
+
+[node name="Kb11" parent="ScrollContainer/ButtonsAndLabels/KeyboardSettings" instance=ExtResource("2_rwahf")]
+layout_mode = 0
+offset_left = 240.0
+offset_top = 288.0
+offset_right = 432.0
+offset_bottom = 336.0
+
+[node name="Kb12" parent="ScrollContainer/ButtonsAndLabels/KeyboardSettings" instance=ExtResource("2_rwahf")]
+layout_mode = 0
+offset_left = 456.0
+offset_top = 288.0
+offset_right = 648.0
+offset_bottom = 336.0
+
+[node name="MouseSettings" type="ColorRect" parent="ScrollContainer/ButtonsAndLabels"]
+visible = false
+layout_mode = 0
+offset_left = 136.0
+offset_right = 824.0
+offset_bottom = 536.0
+color = Color(0.0784314, 0.168627, 0.235294, 0.717647)
+
+[node name="Ms1" parent="ScrollContainer/ButtonsAndLabels/MouseSettings" instance=ExtResource("3_4sp74")]
+layout_mode = 0
+offset_left = 24.0
+offset_top = 24.0
+offset_right = 216.0
+offset_bottom = 72.0
+
+[node name="Ms2" parent="ScrollContainer/ButtonsAndLabels/MouseSettings" instance=ExtResource("3_4sp74")]
+layout_mode = 0
+offset_left = 240.0
+offset_top = 24.0
+offset_right = 432.0
+offset_bottom = 72.0
+
+[node name="Ms3" parent="ScrollContainer/ButtonsAndLabels/MouseSettings" instance=ExtResource("3_4sp74")]
+layout_mode = 0
+offset_left = 456.0
+offset_top = 24.0
+offset_right = 648.0
+offset_bottom = 72.0
+
+[node name="Ms4" parent="ScrollContainer/ButtonsAndLabels/MouseSettings" instance=ExtResource("3_4sp74")]
+layout_mode = 0
+offset_left = 24.0
+offset_top = 112.0
+offset_right = 216.0
+offset_bottom = 160.0
+
+[node name="Ms5" parent="ScrollContainer/ButtonsAndLabels/MouseSettings" instance=ExtResource("3_4sp74")]
+layout_mode = 0
+offset_left = 240.0
+offset_top = 112.0
+offset_right = 432.0
+offset_bottom = 160.0
+
+[node name="Ms6" parent="ScrollContainer/ButtonsAndLabels/MouseSettings" instance=ExtResource("3_4sp74")]
+layout_mode = 0
+offset_left = 456.0
+offset_top = 112.0
+offset_right = 648.0
+offset_bottom = 160.0
+
+[node name="Ms7" parent="ScrollContainer/ButtonsAndLabels/MouseSettings" instance=ExtResource("3_4sp74")]
+layout_mode = 0
+offset_left = 24.0
+offset_top = 200.0
+offset_right = 216.0
+offset_bottom = 248.0
+
+[node name="Ms8" parent="ScrollContainer/ButtonsAndLabels/MouseSettings" instance=ExtResource("3_4sp74")]
+layout_mode = 0
+offset_left = 240.0
+offset_top = 200.0
+offset_right = 432.0
+offset_bottom = 248.0
+
+[node name="Ms9" parent="ScrollContainer/ButtonsAndLabels/MouseSettings" instance=ExtResource("3_4sp74")]
+layout_mode = 0
+offset_left = 456.0
+offset_top = 200.0
+offset_right = 648.0
+offset_bottom = 248.0
+
+[node name="Ms10" parent="ScrollContainer/ButtonsAndLabels/MouseSettings" instance=ExtResource("3_4sp74")]
+layout_mode = 0
+offset_left = 24.0
+offset_top = 288.0
+offset_right = 216.0
+offset_bottom = 336.0
+
+[node name="Ms11" parent="ScrollContainer/ButtonsAndLabels/MouseSettings" instance=ExtResource("3_4sp74")]
+layout_mode = 0
+offset_left = 240.0
+offset_top = 288.0
+offset_right = 432.0
+offset_bottom = 336.0
+
+[node name="Ms12" parent="ScrollContainer/ButtonsAndLabels/MouseSettings" instance=ExtResource("3_4sp74")]
+layout_mode = 0
+offset_left = 456.0
+offset_top = 288.0
+offset_right = 648.0
+offset_bottom = 336.0
+
+[node name="ControllerSettings" type="ColorRect" parent="ScrollContainer/ButtonsAndLabels"]
+visible = false
+layout_mode = 0
+offset_left = 136.0
+offset_right = 824.0
+offset_bottom = 536.0
+color = Color(0.235294, 0.105882, 0.196078, 0.717647)
+
+[node name="Ct1" parent="ScrollContainer/ButtonsAndLabels/ControllerSettings" instance=ExtResource("4_bvyrd")]
+layout_mode = 0
+offset_left = 24.0
+offset_top = 24.0
+offset_right = 216.0
+offset_bottom = 72.0
+
+[node name="Ct2" parent="ScrollContainer/ButtonsAndLabels/ControllerSettings" instance=ExtResource("4_bvyrd")]
+layout_mode = 0
+offset_left = 240.0
+offset_top = 24.0
+offset_right = 432.0
+offset_bottom = 72.0
+
+[node name="Ct3" parent="ScrollContainer/ButtonsAndLabels/ControllerSettings" instance=ExtResource("4_bvyrd")]
+layout_mode = 0
+offset_left = 456.0
+offset_top = 24.0
+offset_right = 648.0
+offset_bottom = 72.0
+
+[node name="Ct4" parent="ScrollContainer/ButtonsAndLabels/ControllerSettings" instance=ExtResource("4_bvyrd")]
+layout_mode = 0
+offset_left = 24.0
+offset_top = 112.0
+offset_right = 216.0
+offset_bottom = 160.0
+
+[node name="Ct5" parent="ScrollContainer/ButtonsAndLabels/ControllerSettings" instance=ExtResource("4_bvyrd")]
+layout_mode = 0
+offset_left = 240.0
+offset_top = 112.0
+offset_right = 432.0
+offset_bottom = 160.0
+
+[node name="Ct6" parent="ScrollContainer/ButtonsAndLabels/ControllerSettings" instance=ExtResource("4_bvyrd")]
+layout_mode = 0
+offset_left = 456.0
+offset_top = 112.0
+offset_right = 648.0
+offset_bottom = 160.0
+
+[node name="Ct7" parent="ScrollContainer/ButtonsAndLabels/ControllerSettings" instance=ExtResource("4_bvyrd")]
+layout_mode = 0
+offset_left = 24.0
+offset_top = 200.0
+offset_right = 216.0
+offset_bottom = 248.0
+
+[node name="Ct8" parent="ScrollContainer/ButtonsAndLabels/ControllerSettings" instance=ExtResource("4_bvyrd")]
+layout_mode = 0
+offset_left = 240.0
+offset_top = 200.0
+offset_right = 432.0
+offset_bottom = 248.0
+
+[node name="Ct9" parent="ScrollContainer/ButtonsAndLabels/ControllerSettings" instance=ExtResource("4_bvyrd")]
+layout_mode = 0
+offset_left = 456.0
+offset_top = 200.0
+offset_right = 648.0
+offset_bottom = 248.0
+
+[node name="Ct10" parent="ScrollContainer/ButtonsAndLabels/ControllerSettings" instance=ExtResource("4_bvyrd")]
+layout_mode = 0
+offset_left = 24.0
+offset_top = 288.0
+offset_right = 216.0
+offset_bottom = 336.0
+
+[node name="Ct11" parent="ScrollContainer/ButtonsAndLabels/ControllerSettings" instance=ExtResource("4_bvyrd")]
+layout_mode = 0
+offset_left = 240.0
+offset_top = 288.0
+offset_right = 432.0
+offset_bottom = 336.0
+
+[node name="Ct12" parent="ScrollContainer/ButtonsAndLabels/ControllerSettings" instance=ExtResource("4_bvyrd")]
+layout_mode = 0
+offset_left = 456.0
+offset_top = 288.0
+offset_right = 648.0
+offset_bottom = 336.0
+
+[connection signal="tab_changed" from="TabBar" to="." method="_on_tab_changed"]

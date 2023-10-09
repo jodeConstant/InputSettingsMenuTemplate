@@ -1,0 +1,10 @@
+[gd_scene load_steps=2 format=3 uid="uid://s225alh8sif4"]
+
+[ext_resource type="Script" path="res://InputSettingsMenu/input_settings_button_ct.gd" id="1_5qwre"]
+
+[node name="InputSettingsButton_CT" type="Button"]
+offset_right = 192.0
+offset_bottom = 64.0
+theme_override_colors/font_color = Color(1, 1, 1, 1)
+text = "-"
+script = ExtResource("1_5qwre")

@@ -1,0 +1,51 @@
+[gd_scene load_steps=2 format=3 uid="uid://bsmdia63xyhds"]
+
+[ext_resource type="Script" path="res://InputSettingsMenu/input_settings_button_ms.gd" id="1_6374y"]
+
+[node name="InputSettingsButton_MS" type="Button"]
+offset_right = 192.0
+offset_bottom = 48.0
+theme_override_colors/font_color = Color(1, 1, 1, 1)
+button_mask = 3
+text = "-"
+script = ExtResource("1_6374y")
+
+[node name="Ctrl" type="Label" parent="."]
+visible = false
+layout_mode = 0
+offset_left = 5.0
+offset_top = 48.0
+offset_right = 45.0
+offset_bottom = 74.0
+text = "+Ctrl"
+vertical_alignment = 1
+
+[node name="Alt" type="Label" parent="."]
+visible = false
+layout_mode = 0
+offset_left = 45.0
+offset_top = 48.0
+offset_right = 85.0
+offset_bottom = 74.0
+text = "+Alt"
+vertical_alignment = 1
+
+[node name="Shift" type="Label" parent="."]
+visible = false
+layout_mode = 0
+offset_left = 79.0
+offset_top = 48.0
+offset_right = 127.0
+offset_bottom = 74.0
+text = "+Shift"
+vertical_alignment = 1
+
+[node name="Meta" type="Label" parent="."]
+visible = false
+layout_mode = 0
+offset_left = 127.0
+offset_top = 48.0
+offset_right = 191.0
+offset_bottom = 74.0
+text = "+Special"
+vertical_alignment = 1

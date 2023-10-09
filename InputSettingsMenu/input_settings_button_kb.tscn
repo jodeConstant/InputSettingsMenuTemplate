@@ -1,0 +1,50 @@
+[gd_scene load_steps=2 format=3 uid="uid://bv5jat57ky7yn"]
+
+[ext_resource type="Script" path="res://InputSettingsMenu/input_settings_button_kb.gd" id="1_uovkq"]
+
+[node name="InputSettingsButton_KB" type="Button"]
+offset_right = 192.0
+offset_bottom = 48.0
+theme_override_colors/font_color = Color(1, 1, 1, 1)
+text = "-"
+script = ExtResource("1_uovkq")
+
+[node name="Ctrl" type="Label" parent="."]
+visible = false
+layout_mode = 0
+offset_left = 5.0
+offset_top = 48.0
+offset_right = 45.0
+offset_bottom = 74.0
+text = "+Ctrl"
+vertical_alignment = 1
+
+[node name="Alt" type="Label" parent="."]
+visible = false
+layout_mode = 0
+offset_left = 45.0
+offset_top = 48.0
+offset_right = 85.0
+offset_bottom = 74.0
+text = "+Alt"
+vertical_alignment = 1
+
+[node name="Shift" type="Label" parent="."]
+visible = false
+layout_mode = 0
+offset_left = 79.0
+offset_top = 48.0
+offset_right = 127.0
+offset_bottom = 74.0
+text = "+Shift"
+vertical_alignment = 1
+
+[node name="Meta" type="Label" parent="."]
+visible = false
+layout_mode = 0
+offset_left = 127.0
+offset_top = 48.0
+offset_right = 175.0
+offset_bottom = 74.0
+text = "+Special"
+vertical_alignment = 1

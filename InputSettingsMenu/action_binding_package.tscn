@@ -1,0 +1,65 @@
+[gd_scene load_steps=5 format=3 uid="uid://dmf2ee2eicxpp"]
+
+[ext_resource type="Script" path="res://InputSettingsMenu/action_binding_ref.gd" id="1_0p48c"]
+[ext_resource type="PackedScene" uid="uid://bv5jat57ky7yn" path="res://InputSettingsMenu/input_settings_button_kb.tscn" id="2_k831w"]
+[ext_resource type="PackedScene" uid="uid://bsmdia63xyhds" path="res://InputSettingsMenu/input_settings_button_ms.tscn" id="3_0hc8i"]
+[ext_resource type="PackedScene" uid="uid://s225alh8sif4" path="res://InputSettingsMenu/input_settings_button_ct.tscn" id="4_qxmej"]
+
+[node name="ActionBindingRef" type="Label" node_paths=PackedStringArray("kb_binding_buttons", "ms_binding_buttons", "ct_binding_buttons")]
+offset_right = 128.0
+offset_bottom = 48.0
+text = "<action name>"
+horizontal_alignment = 1
+vertical_alignment = 1
+script = ExtResource("1_0p48c")
+kb_binding_buttons = [NodePath("Kb1"), NodePath("Kb2"), NodePath("Kb3")]
+ms_binding_buttons = [NodePath("Ms1"), NodePath("Ms2"), NodePath("Ms3")]
+ct_binding_buttons = [NodePath("Ct1"), NodePath("Ct2"), NodePath("Ct3")]
+
+[node name="Kb1" parent="." instance=ExtResource("2_k831w")]
+layout_mode = 0
+offset_left = 160.0
+offset_right = 352.0
+
+[node name="Kb2" parent="." instance=ExtResource("2_k831w")]
+layout_mode = 0
+offset_left = 376.0
+offset_right = 568.0
+
+[node name="Kb3" parent="." instance=ExtResource("2_k831w")]
+layout_mode = 0
+offset_left = 592.0
+offset_right = 784.0
+
+[node name="Ms1" parent="." instance=ExtResource("3_0hc8i")]
+layout_mode = 0
+offset_left = 160.0
+offset_right = 352.0
+
+[node name="Ms2" parent="." instance=ExtResource("3_0hc8i")]
+layout_mode = 0
+offset_left = 376.0
+offset_right = 568.0
+
+[node name="Ms3" parent="." instance=ExtResource("3_0hc8i")]
+layout_mode = 0
+offset_left = 592.0
+offset_right = 784.0
+
+[node name="Ct1" parent="." instance=ExtResource("4_qxmej")]
+layout_mode = 0
+offset_left = 160.0
+offset_right = 352.0
+offset_bottom = 48.0
+
+[node name="Ct2" parent="." instance=ExtResource("4_qxmej")]
+layout_mode = 0
+offset_left = 376.0
+offset_right = 568.0
+offset_bottom = 48.0
+
+[node name="Ct3" parent="." instance=ExtResource("4_qxmej")]
+layout_mode = 0
+offset_left = 592.0
+offset_right = 784.0
+offset_bottom = 48.0
