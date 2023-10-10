@@ -107,31 +107,6 @@ func _ready():
 			if read_value is int:
 				ct_button.curr_input_code = read_value
 				ct_button.update_button_text()
-	
-	# [OLD] Set up existing input settings:
-#	for ref in action_refs_list:
-#		ref_action = ref.action_name
-#		if not CustomInputConfig.config_file.has_section(ref_action):
-#			print_debug("Error: config file has no section %s" % ref_action)
-#			continue
-		
-#		_config_keys = CustomInputConfig.config_file.get_section_keys(ref_action)
-#		for key in _config_keys:
-#			if key.length() != 2:
-#				print_debug("Error: key %s is too long, must be 2 digits" % key)
-#				continue
-			
-#			_input_type = int(key[0])
-#			_button_index = int(key[1])
-#			if _button_index > 2:
-#				print_debug("Error: button index %d out of bounds, max 2" % _button_index)
-#				continue
-			
-#			ref.add_existing_event(
-#				_input_type, 
-#				CustomInputConfig.config_file.get_value(ref_action, key), 
-#				_button_index
-#				)
 
 func _on_tab_changed(tab: int):
 	if tab <= all_tabs.size():
