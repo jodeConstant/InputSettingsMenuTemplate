@@ -6,5 +6,6 @@
 offset_right = 192.0
 offset_bottom = 64.0
 theme_override_colors/font_color = Color(1, 1, 1, 1)
+button_mask = 3
 text = "-"
 script = ExtResource("1_5qwre")

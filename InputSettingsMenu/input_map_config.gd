@@ -2,7 +2,7 @@ extends Node
 
 class_name InputMapConfig
 
-var config_file_path: = "res://InputSettingsTests/InputMapPref.ini"
+var config_file_path: = "user://InputMapPref.ini"
 
 # Add configurable actions in InputMap to this array
 # OR leave empty to automatically add all non- built-in actions
@@ -16,7 +16,7 @@ var configurable_actions: Array[StringName] \
 # 3 keys, mouse + key combinations and controller buttons
 var MAX_PER_TYPE: int = 3
 
-func configure():
+func initialize():
 	if not config_file:
 		config_file = ConfigFile.new()
 		
@@ -26,10 +26,17 @@ func configure():
 	if config_file.load(config_file_path) == OK:
 		_load_inputs()
 	else:# defaults
-		_save_default_inputmap()
+		_save_current_inputmap()
 
+func restore_defaults():
+	InputMap.load_from_project_settings()
+	save_settings()
 
-func _save_default_inputmap():
+func save_settings():
+	var err: Error = config_file.save(config_file_path)
+	# TODO: signal save success
+
+func _save_current_inputmap():
 	print_debug("Saving InputMap to file...")
 	print_debug("TESTING: Printing InputMap to console...")
 	var _actions: = InputMap.get_actions().slice(76)
@@ -69,22 +76,20 @@ func _save_default_inputmap():
 				input_indices.z += 1
 			print_debug(ev)
 		print_debug("---------")
-	config_file.save(config_file_path)
+	save_settings()
 
 func _load_inputs():
 	var keys: PackedStringArray
 	var read_val
-	for a in config_file.get_sections():
-		if not InputMap.has_action(a):
-			# not a valid setting, continue to next section / action
-			continue
-			
+	var actions: = InputMap.get_actions().slice(76)
+	for a in configurable_actions:
 		# no keys = no mapped inputs / input bindings
 		InputMap.action_erase_events(a)
-		keys = config_file.get_section_keys(a)
-		if keys.is_empty():
+		if not config_file.has_section(a):
+			# no saved events
 			continue
-			
+		
+		keys = config_file.get_section_keys(a)
 		keys.sort()
 		for k in keys:
 			read_val = config_file.get_value(a, k)
@@ -95,6 +100,28 @@ func _load_inputs():
 					int(read_val)
 					)
 		print_debug("---------")
+	
+#	for a in config_file.get_sections():
+#		if not InputMap.has_action(a):
+#			# not a valid setting, continue to next section / action
+#			continue
+#			
+#		# no keys = no mapped inputs / input bindings
+#		InputMap.action_erase_events(a)
+#		keys = config_file.get_section_keys(a)
+#		if keys.is_empty():
+#			continue
+#			
+#		keys.sort()
+#		for k in keys:
+#			read_val = config_file.get_value(a, k)
+#			if read_val is int:
+#				_add_event_to_map(
+#					a, 
+#					int(k) / 10, 
+#					int(read_val)
+#					)
+#		print_debug("---------")
 
 func _add_event_to_map(action: StringName, type: int, code: int):
 	if type == 3:
@@ -119,4 +146,7 @@ func _add_event_to_map(action: StringName, type: int, code: int):
 		print_debug(modd_ev)
 
 func _ready():
-	configure()
+	initialize()
+
+func _exit_tree():
+	save_settings()

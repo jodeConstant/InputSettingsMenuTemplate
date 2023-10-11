@@ -96,11 +96,15 @@ func _gui_input(event):
 				
 				release_focus()
 				_set_binding()
-			else:
+			elif event.button_index == MOUSE_BUTTON_LEFT:
 				reading = true
-			accept_event()
+			elif event.button_index == MOUSE_BUTTON_RIGHT:
+				reset_binding()
+				input_set.emit(self)
+			#accept_event()
 		elif event is InputEventKey:
 			if event.physical_keycode == KEY_ESCAPE:
 				reading = false
 				release_focus()
-				accept_event()
+				#accept_event()
+	accept_event()

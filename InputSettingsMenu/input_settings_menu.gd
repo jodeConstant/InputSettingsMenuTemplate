@@ -82,9 +82,8 @@ func _ready():
 				ref_action, 
 				str(10 + kb_button.index), 
 				-1)
-			if read_value is int:
-				kb_button.curr_input_code = read_value
-				kb_button.update_button_text()
+			kb_button.curr_input_code = read_value if (read_value is int) else -1
+			kb_button.update_button_text()
 		
 		all_ms_buttons.append_array(ref.ms_binding_buttons)
 		for ms_button in ref.ms_binding_buttons:
@@ -93,9 +92,8 @@ func _ready():
 				ref_action, 
 				str(20 + ms_button.index), 
 				-1)
-			if read_value is int:
-				ms_button.curr_input_code = read_value
-				ms_button.update_button_text()
+			ms_button.curr_input_code = read_value if (read_value is int) else -1
+			ms_button.update_button_text()
 		
 		all_ct_buttons.append_array(ref.ct_binding_buttons)
 		for ct_button in ref.ct_binding_buttons:
@@ -104,9 +102,8 @@ func _ready():
 				ref_action, 
 				str(30 + ct_button.index), 
 				-1)
-			if read_value is int:
-				ct_button.curr_input_code = read_value
-				ct_button.update_button_text()
+			ct_button.curr_input_code = read_value if (read_value is int) else -1
+			ct_button.update_button_text()
 
 func _on_tab_changed(tab: int):
 	if tab <= all_tabs.size():

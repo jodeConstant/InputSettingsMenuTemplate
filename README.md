@@ -1,10 +1,18 @@
-# Input Settings Menu template
+# Input Settings Menu and configuration template, WIP
 
-This project contains a simple input cistomization interface that can be used for various games made in Godot. UI components purposefully do not require creation of new themes and should be fairly easy to add to a game project by copying the InputSettingsMenu folder to another project
+This project contains a simple input cistomization interface that can be used for various games made in Godot. UI components purposefully do not require creation of new themes and should be fairly easy to add to a game project by copying the InputSettingsMenu folder to another project.
+
+The menu is primarily intended to be used with a mouse. At the moment I don't have a controller to test it with, but that is something I would like to refine and test at some point.
+
+TODO:
+
+- Implement and / or test keyboard only and controller only usage
 
 ## Basic structure and key classes and scripts
 
 Menu script contains an array of ActionBindingRef instances, each of which should correspond to a configurable action. Each ActionBindingRef instance in turn contains an array for each type of input configuration buttons. These references need to be set for the menu to function correctly
+
+In the current implementation, input customization buttons are selected / activated to read an input with left mouse button and bindings are reset by clicking the customization button with the right mouse button.
 
 ### InputMapConfig class
 
@@ -32,3 +40,4 @@ Menu script contains an array of ActionBindingRef instances, each of which shoul
 ### ActionBindingRef
 
 - Contains references to input customization buttons for one specific action
+  - An individual array for each type

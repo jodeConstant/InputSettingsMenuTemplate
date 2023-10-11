@@ -23,7 +23,14 @@ func reset_binding(update_text: bool = true):
 	ct_event = null
 
 func _gui_input(event):
-	if event is InputEventJoypadButton:
+	if event is InputEventMouseButton:
+		if event.button_index == MOUSE_BUTTON_RIGHT:
+			reset_binding()
+			input_set.emit(self)
+			#accept_event()
+			release_focus()
+	
+	elif event is InputEventJoypadButton:
 		if event.pressed:
 			if event.button_index != curr_input_code:
 				if (curr_input_code > -1) or ct_event:
@@ -51,10 +58,11 @@ func _gui_input(event):
 				
 				update_button_text()
 			
-			accept_event()
+			#accept_event()
 			release_focus()
 	
 	elif event is InputEventKey:
 		if event.physical_keycode == KEY_ESCAPE:
+			#accept_event()
 			release_focus()
-			accept_event()
+	accept_event()

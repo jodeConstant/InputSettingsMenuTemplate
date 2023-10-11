@@ -89,7 +89,14 @@ func _set_binding():
 	update_button_text()
 
 func _gui_input(event):
-	if event is InputEventKey:
+	if event is InputEventMouseButton:
+		if event.button_index == MOUSE_BUTTON_RIGHT:
+			reset_binding()
+			input_set.emit(self)
+			release_focus()
+			#accept_event()
+	
+	elif event is InputEventKey:
 		print_debug("Raw input read is: %s" % event)
 		if event.physical_keycode != KEY_ESCAPE:
 			if event.pressed:
@@ -105,7 +112,7 @@ func _gui_input(event):
 				and (_key_bits != KEY_ALT) and (_key_bits != KEY_META):
 					release_focus()
 					_set_binding()
-				accept_event()
+				#accept_event()
 				
 			else:# released; no non-mod key was pressed
 				# If key is Ctrl, no need to modify code modifier and key parts
@@ -143,7 +150,9 @@ func _gui_input(event):
 				key_label = new_input_code & KEY_CODE_MASK
 				print_debug("on-release code ends up as: %d" % new_input_code)
 				release_focus()
-				accept_event()
+				#accept_event()
 				_set_binding()
 		else:
 			release_focus()
+			#accept_event()
+	accept_event()
