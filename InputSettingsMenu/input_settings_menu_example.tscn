@@ -11,11 +11,19 @@ layout_mode = 3
 anchors_preset = 15
 anchor_right = 1.0
 anchor_bottom = 1.0
+offset_right = -320.0
+offset_bottom = -72.0
 grow_horizontal = 2
 grow_vertical = 2
 script = ExtResource("1_1uo8b")
 all_tabs = [NodePath("ScrollContainer/ButtonsAndLabels/KeyboardSettings"), NodePath("ScrollContainer/ButtonsAndLabels/MouseSettings"), NodePath("ScrollContainer/ButtonsAndLabels/ControllerSettings")]
 current_tab = NodePath("ScrollContainer/ButtonsAndLabels/KeyboardSettings")
+
+[node name="TabBG" type="ColorRect" parent="."]
+layout_mode = 0
+offset_right = 832.0
+offset_bottom = 40.0
+color = Color(0.12549, 0.14902, 0.160784, 1)
 
 [node name="TabBar" type="TabBar" parent="."]
 layout_mode = 0

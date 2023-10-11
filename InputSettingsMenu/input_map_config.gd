@@ -37,8 +37,7 @@ func save_settings():
 	# TODO: signal save success
 
 func _save_current_inputmap():
-	print_debug("Saving InputMap to file...")
-	print_debug("TESTING: Printing InputMap to console...")
+	print_debug("Saving InputMap to file")
 	var _actions: = InputMap.get_actions().slice(76)
 	var _events: Array[InputEvent]
 	var _e: InputEvent
@@ -79,6 +78,7 @@ func _save_current_inputmap():
 	save_settings()
 
 func _load_inputs():
+	print_debug("Loading input settings from file")
 	var keys: PackedStringArray
 	var read_val
 	var actions: = InputMap.get_actions().slice(76)
@@ -147,6 +147,3 @@ func _add_event_to_map(action: StringName, type: int, code: int):
 
 func _ready():
 	initialize()
-
-func _exit_tree():
-	save_settings()

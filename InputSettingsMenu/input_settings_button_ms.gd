@@ -26,9 +26,7 @@ func update_button_text():
 		text = ""
 
 func reset_binding(update_text: bool = true):
-	if ms_event:
-		InputMap.action_erase_event(action_name, ms_event)
-	else:
+	if not ms_event:
 		ms_event = InputEventMouseButton.new()
 		
 		ms_event.button_index = (curr_input_code & KEY_CODE_MASK) as MouseButton
@@ -37,8 +35,17 @@ func reset_binding(update_text: bool = true):
 		ms_event.alt_pressed = curr_input_code & KEY_MASK_ALT
 		ms_event.shift_pressed = curr_input_code & KEY_MASK_SHIFT
 		ms_event.ctrl_pressed = curr_input_code & KEY_MASK_CTRL
+	
+	InputMap.action_erase_event(action_name, ms_event)
 		
 	curr_input_code = -1
+	
+	CustomInputConfig.config_file.set_value(
+					action_name, 
+					str(20 + index), 
+					curr_input_code
+					)
+					
 	if update_text:
 		update_button_text()
 	

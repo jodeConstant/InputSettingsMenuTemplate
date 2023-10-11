@@ -9,14 +9,20 @@ func update_button_text():
 				if curr_input_code > -1 else ""
 
 func reset_binding(update_text: bool = true):
-	if ct_event:
-		InputMap.action_erase_event(action_name, ct_event)
-	else:
+	if not ct_event:
 		ct_event = InputEventJoypadButton.new()
 		ct_event.button_index = curr_input_code as JoyButton
-		InputMap.action_erase_event(action_name, ct_event)
+	
+	InputMap.action_erase_event(action_name, ct_event)
 	
 	curr_input_code = -1
+	
+	CustomInputConfig.config_file.set_value(
+					action_name, 
+					str(30 + index), 
+					curr_input_code
+					)
+					
 	if update_text:
 		update_button_text()
 	

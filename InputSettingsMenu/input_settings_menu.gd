@@ -71,6 +71,7 @@ func _ready():
 		$ScrollContainer/ButtonsAndLabels/ActionLabels.get_children()
 		)
 	
+	print_debug("Setting up menu buttons")
 	var read_value
 	for ref in action_refs_list:
 		ref_action = ref.action_name

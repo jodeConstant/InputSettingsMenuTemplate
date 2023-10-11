@@ -29,10 +29,7 @@ func update_button_text():
 		text = ""
 
 func reset_binding(update_text: bool = true):
-	if kb_event:
-		InputMap.action_erase_event(action_name, kb_event)
-	
-	else:
+	if not kb_event:
 		kb_event = InputEventKey.new()
 		
 		kb_event.physical_keycode = (curr_input_code & KEY_CODE_MASK) as Key
@@ -42,7 +39,16 @@ func reset_binding(update_text: bool = true):
 		kb_event.shift_pressed = curr_input_code & KEY_MASK_SHIFT
 		kb_event.ctrl_pressed = curr_input_code & KEY_MASK_CTRL
 	
+	InputMap.action_erase_event(action_name, kb_event)
+	
 	curr_input_code = -1
+	
+	CustomInputConfig.config_file.set_value(
+					action_name, 
+					str(10 + index), 
+					curr_input_code
+					)
+					
 	if update_text:
 		update_button_text()
 	
