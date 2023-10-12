@@ -19,13 +19,13 @@ script = ExtResource("1_1uo8b")
 all_tabs = [NodePath("ScrollContainer/ButtonsAndLabels/KeyboardSettings"), NodePath("ScrollContainer/ButtonsAndLabels/MouseSettings"), NodePath("ScrollContainer/ButtonsAndLabels/ControllerSettings")]
 current_tab = NodePath("ScrollContainer/ButtonsAndLabels/KeyboardSettings")
 
-[node name="TabBG" type="ColorRect" parent="."]
+[node name="TabBar" type="ColorRect" parent="."]
 layout_mode = 0
 offset_right = 832.0
 offset_bottom = 40.0
 color = Color(0.12549, 0.14902, 0.160784, 1)
 
-[node name="TabBar" type="TabBar" parent="."]
+[node name="Tabs" type="TabBar" parent="TabBar"]
 layout_mode = 0
 offset_left = 64.0
 offset_right = 640.0
@@ -384,4 +384,40 @@ offset_top = 288.0
 offset_right = 648.0
 offset_bottom = 336.0
 
-[connection signal="tab_changed" from="TabBar" to="." method="_on_tab_changed"]
+[node name="Filler" type="Label" parent="ScrollContainer/ButtonsAndLabels"]
+layout_mode = 2
+offset_left = 328.0
+offset_top = 488.0
+offset_right = 571.0
+offset_bottom = 528.0
+text = "<CAN FIR MORE OPTIONS>"
+horizontal_alignment = 1
+vertical_alignment = 1
+
+[node name="Filler2" type="Label" parent="ScrollContainer/ButtonsAndLabels"]
+layout_mode = 2
+offset_left = 328.0
+offset_top = 370.0
+offset_right = 571.0
+offset_bottom = 410.0
+text = "<CAN FIR MORE OPTIONS>"
+horizontal_alignment = 1
+vertical_alignment = 1
+
+[node name="BottomBar" type="ColorRect" parent="."]
+layout_mode = 0
+offset_top = 488.0
+offset_right = 832.0
+offset_bottom = 560.0
+color = Color(0.12549, 0.14902, 0.160784, 1)
+
+[node name="ResetButton" type="Button" parent="BottomBar"]
+layout_mode = 0
+offset_left = 584.0
+offset_top = 16.0
+offset_right = 699.0
+offset_bottom = 54.0
+text = "Defaults"
+
+[connection signal="tab_changed" from="TabBar/Tabs" to="." method="_on_tab_changed"]
+[connection signal="pressed" from="BottomBar/ResetButton" to="." method="_restore_defaults"]

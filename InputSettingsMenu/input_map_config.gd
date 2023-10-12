@@ -30,6 +30,7 @@ func initialize():
 
 func restore_defaults():
 	InputMap.load_from_project_settings()
+	_save_current_inputmap()
 	save_settings()
 
 func save_settings():
@@ -94,36 +95,14 @@ func _load_inputs():
 		for k in keys:
 			read_val = config_file.get_value(a, k)
 			if read_val is int:
-				_add_event_to_map(
+				_add_loaded_event(
 					a, 
 					int(k) / 10, 
 					int(read_val)
 					)
 		print_debug("---------")
-	
-#	for a in config_file.get_sections():
-#		if not InputMap.has_action(a):
-#			# not a valid setting, continue to next section / action
-#			continue
-#			
-#		# no keys = no mapped inputs / input bindings
-#		InputMap.action_erase_events(a)
-#		keys = config_file.get_section_keys(a)
-#		if keys.is_empty():
-#			continue
-#			
-#		keys.sort()
-#		for k in keys:
-#			read_val = config_file.get_value(a, k)
-#			if read_val is int:
-#				_add_event_to_map(
-#					a, 
-#					int(k) / 10, 
-#					int(read_val)
-#					)
-#		print_debug("---------")
 
-func _add_event_to_map(action: StringName, type: int, code: int):
+func _add_loaded_event(action: StringName, type: int, code: int):
 	if type == 3:
 		var joy_ev: = InputEventJoypadButton.new()
 		joy_ev.button_index = code as JoyButton
@@ -147,3 +126,7 @@ func _add_event_to_map(action: StringName, type: int, code: int):
 
 func _ready():
 	initialize()
+
+func _notification(what):
+	if what == NOTIFICATION_WM_CLOSE_REQUEST:
+		save_settings()

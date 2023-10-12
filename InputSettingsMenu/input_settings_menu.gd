@@ -71,14 +71,26 @@ func _ready():
 		$ScrollContainer/ButtonsAndLabels/ActionLabels.get_children()
 		)
 	
-	print_debug("Setting up menu buttons")
+	for ref in action_refs_list:
+		all_kb_buttons.append_array(ref.kb_binding_buttons)
+		all_ms_buttons.append_array(ref.ms_binding_buttons)
+		all_ct_buttons.append_array(ref.ct_binding_buttons)
+	for kb_button in all_kb_buttons:
+		kb_button.input_set.connect(_check_input_conflicts)
+	for ms_button in all_ms_buttons:
+		ms_button.input_set.connect(_check_input_conflicts)
+	for ct_button in all_ct_buttons:
+		ct_button.input_set.connect(_check_input_conflicts)
+	
+	set_up_button_data()
+	
+func set_up_button_data():
+	print_debug("Setting up menu button data")
 	var read_value
 	for ref in action_refs_list:
 		ref_action = ref.action_name
 		
-		all_kb_buttons.append_array(ref.kb_binding_buttons)
 		for kb_button in ref.kb_binding_buttons:
-			kb_button.input_set.connect(_check_input_conflicts)
 			read_value = CustomInputConfig.config_file.get_value(
 				ref_action, 
 				str(10 + kb_button.index), 
@@ -86,9 +98,7 @@ func _ready():
 			kb_button.curr_input_code = read_value if (read_value is int) else -1
 			kb_button.update_button_text()
 		
-		all_ms_buttons.append_array(ref.ms_binding_buttons)
 		for ms_button in ref.ms_binding_buttons:
-			ms_button.input_set.connect(_check_input_conflicts)
 			read_value = CustomInputConfig.config_file.get_value(
 				ref_action, 
 				str(20 + ms_button.index), 
@@ -96,9 +106,7 @@ func _ready():
 			ms_button.curr_input_code = read_value if (read_value is int) else -1
 			ms_button.update_button_text()
 		
-		all_ct_buttons.append_array(ref.ct_binding_buttons)
 		for ct_button in ref.ct_binding_buttons:
-			ct_button.input_set.connect(_check_input_conflicts)
 			read_value = CustomInputConfig.config_file.get_value(
 				ref_action, 
 				str(30 + ct_button.index), 
@@ -112,3 +120,11 @@ func _on_tab_changed(tab: int):
 			current_tab.visible = false
 			current_tab = all_tabs[tab]
 			current_tab.visible = true
+
+func _show_restore_defaults_confirm():
+	pass
+
+func _restore_defaults():
+	CustomInputConfig.restore_defaults()
+	set_up_button_data()
+	#call_deferred("set_up_button_data")
