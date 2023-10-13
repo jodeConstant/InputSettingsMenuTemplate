@@ -1,14 +1,14 @@
-[gd_scene load_steps=2 format=3 uid="uid://bv5jat57ky7yn"]
+[gd_scene load_steps=2 format=3 uid="uid://bsmdia63xyhds"]
 
-[ext_resource type="Script" path="res://InputSettingsMenu/input_settings_button_kb.gd" id="1_uovkq"]
+[ext_resource type="Script" path="res://InputSettingsMenu/Buttons/input_settings_button_ms.gd" id="1_6374y"]
 
-[node name="InputSettingsButton_KB" type="Button"]
+[node name="InputSettingsButton_MS" type="Button"]
 offset_right = 192.0
 offset_bottom = 48.0
 theme_override_colors/font_color = Color(1, 1, 1, 1)
 button_mask = 3
 text = "-"
-script = ExtResource("1_uovkq")
+script = ExtResource("1_6374y")
 
 [node name="Ctrl" type="Label" parent="."]
 visible = false
@@ -45,7 +45,7 @@ visible = false
 layout_mode = 0
 offset_left = 127.0
 offset_top = 48.0
-offset_right = 175.0
+offset_right = 191.0
 offset_bottom = 74.0
 text = "+Special"
 vertical_alignment = 1

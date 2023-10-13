@@ -1,9 +1,9 @@
 [gd_scene load_steps=5 format=3 uid="uid://dmf2ee2eicxpp"]
 
 [ext_resource type="Script" path="res://InputSettingsMenu/action_binding_ref.gd" id="1_0p48c"]
-[ext_resource type="PackedScene" uid="uid://bv5jat57ky7yn" path="res://InputSettingsMenu/input_settings_button_kb.tscn" id="2_k831w"]
-[ext_resource type="PackedScene" uid="uid://bsmdia63xyhds" path="res://InputSettingsMenu/input_settings_button_ms.tscn" id="3_0hc8i"]
-[ext_resource type="PackedScene" uid="uid://s225alh8sif4" path="res://InputSettingsMenu/input_settings_button_ct.tscn" id="4_qxmej"]
+[ext_resource type="PackedScene" uid="uid://bv5jat57ky7yn" path="res://InputSettingsMenu/Buttons/input_settings_button_kb.tscn" id="2_k831w"]
+[ext_resource type="PackedScene" uid="uid://bsmdia63xyhds" path="res://InputSettingsMenu/Buttons/input_settings_button_ms.tscn" id="3_0hc8i"]
+[ext_resource type="PackedScene" uid="uid://s225alh8sif4" path="res://InputSettingsMenu/Buttons/input_settings_button_ct.tscn" id="4_qxmej"]
 
 [node name="ActionBindingRef" type="Label" node_paths=PackedStringArray("kb_binding_buttons", "ms_binding_buttons", "ct_binding_buttons")]
 offset_right = 128.0
