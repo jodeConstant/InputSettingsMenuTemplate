@@ -4,17 +4,26 @@ class_name InputMapConfig
 
 var config_file_path: = "user://InputMapPref.ini"
 
-# Add configurable actions in InputMap to this array
-# OR leave empty to automatically add all non- built-in actions
+# Add configurable actions in InputMap to this array *in this script*
+# OR leave empty to automatically add all non- built-in actions.
+# Actions not present in the list won't be saved,
+# unless file was create BEFORE this script was changed
 var configurable_actions: Array[StringName] \
 	= [
-		
+		"forward",
+		"backward",
+		"left",
+		"right"
 	]
 
 @onready var config_file: = ConfigFile.new()
 
 # 3 keys, mouse + key combinations and controller buttons
 var MAX_PER_TYPE: int = 3
+
+# Remove if immediate initialization is not desirable:
+func _ready():
+	initialize()
 
 func initialize():
 	if not config_file:
@@ -30,6 +39,7 @@ func initialize():
 
 func restore_defaults():
 	InputMap.load_from_project_settings()
+	config_file.clear()
 	_save_current_inputmap()
 	save_settings()
 
@@ -39,11 +49,12 @@ func save_settings():
 
 func _save_current_inputmap():
 	print_debug("Saving InputMap to file")
-	var _actions: = InputMap.get_actions().slice(76)
+	if configurable_actions.is_empty():
+		configurable_actions = InputMap.get_actions().slice(76)
 	var _events: Array[InputEvent]
 	var _e: InputEvent
 	var input_indices: Vector3i# x = key, y = mouse, z = controller / "joypad"
-	for a in _actions:
+	for a in configurable_actions:
 		print_debug("Saving action \"%s\" to config file:" % a)
 		input_indices = Vector3i.ZERO
 		_events = InputMap.action_get_events(a)
@@ -82,7 +93,6 @@ func _load_inputs():
 	print_debug("Loading input settings from file")
 	var keys: PackedStringArray
 	var read_val
-	var actions: = InputMap.get_actions().slice(76)
 	for a in configurable_actions:
 		# no keys = no mapped inputs / input bindings
 		InputMap.action_erase_events(a)
@@ -123,9 +133,6 @@ func _add_loaded_event(action: StringName, type: int, code: int):
 		modd_ev.meta_pressed = code & KEY_MASK_META
 		InputMap.action_add_event(action, modd_ev)
 		print_debug(modd_ev)
-
-func _ready():
-	initialize()
 
 func _notification(what):
 	if what == NOTIFICATION_WM_CLOSE_REQUEST:

@@ -1,8 +1,5 @@
 extends Control
 
-@export var inputsettings_filepath: String = \
-	"res://InputSettingsMenu/InputSettings.ini"
-
 @export var all_tabs: Array[Control]
 @export var current_tab: Control
 

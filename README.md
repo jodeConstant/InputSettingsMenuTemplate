@@ -2,6 +2,19 @@
 
 This project contains a simple input cistomization interface that can be used for various games made in Godot. UI components purposefully do not require creation of new themes and should be fairly easy to add to a game project by copying the InputSettingsMenu folder to another project.
 
+## Currently implemented features
+
+- Configuration script that can:
+  - Save and load input settings to/from a file
+  - Restore defaults from prject settings
+- Buttons for setting inputs:
+  - 3 types, for keyboard, moouse with certain keyboard keys and controller
+- Menu script that can:
+  - Set up button variables / data
+  - Check for conflicting input events between actions
+  - Switch tabs, by setting visibility
+  - Signal input configuration script to restore defaults
+
 The menu is primarily intended to be used with a mouse. At the moment I don't have a controller to test it with, but that is something I would like to refine and test at some point.
 
 TODO:
@@ -19,6 +32,10 @@ In the current implementation, input customization buttons are selected / activa
 - Intended to be used as an autoloaded node
 - Manages input settings file saving and loading, generally at the launch and closing of the application
 - Loads or generates a new settings file regardless of whether the settings menu is opened or not
+
+Because this class is separate from the settings menu, it will not automatically know which actions can be configured. By default, it includes all non-built-in actions in the `ConfigFile` object and actual file.
+
+*Non-built-in actions are added to the end of the list in InputMap, and can be obtained by retrieveing the list of actions from `InputMap`, and getting the slice from index 76 to the end: `InputMap.get_actions().slice(76)`*
 
 #### `configure()` -method
   
