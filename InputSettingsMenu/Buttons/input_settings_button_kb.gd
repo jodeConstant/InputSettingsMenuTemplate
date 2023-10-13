@@ -28,18 +28,21 @@ func update_button_text():
 	else:
 		text = ""
 
-func reset_binding(update_text: bool = true):
-	if not kb_event:
-		kb_event = InputEventKey.new()
+func reset_binding(update_text: bool = true, removing_duplicate: bool = false):
+	if not removing_duplicate:
+		if not kb_event:
+			kb_event = InputEventKey.new()
+			
+			kb_event.physical_keycode = (curr_input_code & KEY_CODE_MASK) as Key
+			
+			kb_event.meta_pressed = curr_input_code & KEY_MASK_META
+			kb_event.alt_pressed = curr_input_code & KEY_MASK_ALT
+			kb_event.shift_pressed = curr_input_code & KEY_MASK_SHIFT
+			kb_event.ctrl_pressed = curr_input_code & KEY_MASK_CTRL
 		
-		kb_event.physical_keycode = (curr_input_code & KEY_CODE_MASK) as Key
-		
-		kb_event.meta_pressed = curr_input_code & KEY_MASK_META
-		kb_event.alt_pressed = curr_input_code & KEY_MASK_ALT
-		kb_event.shift_pressed = curr_input_code & KEY_MASK_SHIFT
-		kb_event.ctrl_pressed = curr_input_code & KEY_MASK_CTRL
+		InputMap.action_erase_event(action_name, kb_event)
 	
-	InputMap.action_erase_event(action_name, kb_event)
+	kb_event = null
 	
 	curr_input_code = -1
 	
@@ -51,8 +54,6 @@ func reset_binding(update_text: bool = true):
 					
 	if update_text:
 		update_button_text()
-	
-	kb_event = null
 
 # finalize setting
 func _set_binding():
@@ -90,6 +91,7 @@ func _set_binding():
 	
 	curr_input_code = new_input_code
 	
+	input_set_preliminary.emit(self)
 	input_set.emit(self)
 	
 	update_button_text()

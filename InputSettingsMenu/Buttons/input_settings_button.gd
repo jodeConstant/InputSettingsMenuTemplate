@@ -21,10 +21,11 @@ var conflict: bool:
 
 var font_color: StringName = "font_color"
 
-signal input_set(button, code)
+signal input_set_preliminary(button)
+signal input_set(button)
 
 func update_button_text():
 	pass
 
-func reset_binding():
+func reset_binding(update_text: bool = true, removing_duplicate: bool = false):
 	pass

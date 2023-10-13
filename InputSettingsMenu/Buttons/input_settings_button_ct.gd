@@ -8,12 +8,15 @@ func update_button_text():
 	text = ("Button %d" % curr_input_code) \
 				if curr_input_code > -1 else ""
 
-func reset_binding(update_text: bool = true):
-	if not ct_event:
-		ct_event = InputEventJoypadButton.new()
-		ct_event.button_index = curr_input_code as JoyButton
+func reset_binding(update_text: bool = true, removing_duplicate: bool = false):
+	if not removing_duplicate:
+		if not ct_event:
+			ct_event = InputEventJoypadButton.new()
+			ct_event.button_index = curr_input_code as JoyButton
+		
+		InputMap.action_erase_event(action_name, ct_event)
 	
-	InputMap.action_erase_event(action_name, ct_event)
+	ct_event = null
 	
 	curr_input_code = -1
 	
@@ -25,8 +28,6 @@ func reset_binding(update_text: bool = true):
 					
 	if update_text:
 		update_button_text()
-	
-	ct_event = null
 
 func _gui_input(event):
 	if event is InputEventMouseButton:
@@ -60,6 +61,7 @@ func _gui_input(event):
 				
 				curr_input_code = new_input_code
 				
+				input_set_preliminary.emit(self)
 				input_set.emit(self)
 				
 				update_button_text()

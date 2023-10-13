@@ -8,7 +8,18 @@ This project contains a simple input cistomization interface that can be used fo
   - Save and load input settings to/from a file
   - Restore defaults from prject settings
 - Buttons for setting inputs:
-  - 3 types, for keyboard, moouse with certain keyboard keys and controller
+  - keyboard keys, potentailly with following modifier keys:
+    - Ctrls
+    - Windows / Cmd
+    - Alt
+    - Shift
+  - mouse buttons, potentially with following modifier keys:
+    - Ctrls
+    - Windows / Cmd
+    - Alt
+    - Shift
+  - controller buttons
+- A bundling script for binding several buttons to manage a specific action
 - Menu script that can:
   - Set up button variables / data
   - Check for conflicting input events between actions
@@ -41,11 +52,6 @@ Because this class is separate from the settings menu, it will not automatically
   
 - Called in `_ready()`, and can be called at any point to either load contents of the configuration file into a ConfigFile object, or generate ConfigFile object from project settings' default InputMap state
 
-### Menu script
-
-- Initializes buttons based on input settings
-- Checks for conflicting input events / events used for more than one action
-
 ### Button scripts
 
 - Read appropriate inputs when pressed selected, and assign them to InputMap singleton
@@ -58,3 +64,8 @@ Because this class is separate from the settings menu, it will not automatically
 
 - Contains references to input customization buttons for one specific action
   - An individual array for each type
+
+### Menu script
+
+- Initializes ActionBindingRef instances' buttons based on input settings
+- Checks for conflicting input events / events used for more than one action

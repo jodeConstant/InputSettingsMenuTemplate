@@ -17,6 +17,7 @@ var ref_action: StringName
 # 	conflicting after the new input is assigned = is now / still
 # 	in conflict with some other button.
 func _check_input_conflicts(button: InputSettingsButton):
+	print_debug("Conflict check")
 	var type: int
 	var button_array: Array[InputSettingsButton]
 	if button is InputSettingsButtonKb:
