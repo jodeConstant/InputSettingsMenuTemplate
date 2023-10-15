@@ -1,6 +1,6 @@
 # Input Settings Menu and configuration template, WIP
 
-This project contains a simple input customization interface that can be used for various games made in Godot. UI components purposefully do not require creation of new themes and should be fairly easy to add to a game project by copying the InputSettingsMenu folder to another project, and then modifying as desired.
+This project contains a simple input customization interface that can be used for various games made in Godot. UI components purposefully do not require creation of new themes and should be fairly easy to add to a game project by copying the **InputSettingsMenu folder** to another project, and then modifying as desired.
 
 Made with and for Godot game engine, <https://godotengine.org/license>
 
@@ -12,6 +12,8 @@ Made with and for Godot game engine, <https://godotengine.org/license>
 - A menu script that sets up button variables, can call configuration script to restore defaults and potentially switch tabs for types of inputs
 
 The menu is primarily intended to be used with a mouse. At the moment I don't have a controller to test it with, but that is something I would like to refine and test at some point.
+
+Menu example scene is almost certainly insufficient for a game, and is intended to serve as an example structure. Feel free to derive a more robust menu from it or build you own.
 
 TODO:
 
