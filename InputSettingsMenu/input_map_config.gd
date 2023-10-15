@@ -10,10 +10,7 @@ var config_file_path: = "user://InputMapPref.ini"
 # unless file was create BEFORE this script was changed
 var configurable_actions: Array[StringName] \
 	= [
-		"forward",
-		"backward",
-		"left",
-		"right"
+		
 	]
 
 @onready var config_file: = ConfigFile.new()
