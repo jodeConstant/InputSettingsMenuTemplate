@@ -6,7 +6,7 @@
 [ext_resource type="PackedScene" uid="uid://bsmdia63xyhds" path="res://InputSettingsMenu/Buttons/input_settings_button_ms.tscn" id="3_4sp74"]
 [ext_resource type="PackedScene" uid="uid://s225alh8sif4" path="res://InputSettingsMenu/Buttons/input_settings_button_ct.tscn" id="4_bvyrd"]
 
-[node name="InputSettingsMenuExample" type="Control" node_paths=PackedStringArray("all_tabs", "current_tab")]
+[node name="InputSettingsMenuExample" type="Control" node_paths=PackedStringArray("all_tabs", "current_tab", "action_refs_container")]
 layout_mode = 3
 anchors_preset = 15
 anchor_right = 1.0
@@ -18,6 +18,7 @@ grow_vertical = 2
 script = ExtResource("1_1uo8b")
 all_tabs = [NodePath("ScrollContainer/ButtonsAndLabels/KeyboardSettings"), NodePath("ScrollContainer/ButtonsAndLabels/MouseSettings"), NodePath("ScrollContainer/ButtonsAndLabels/ControllerSettings")]
 current_tab = NodePath("ScrollContainer/ButtonsAndLabels/KeyboardSettings")
+action_refs_container = NodePath("ScrollContainer/ButtonsAndLabels/ActionRefsAndLabels")
 
 [node name="TabBar" type="ColorRect" parent="."]
 layout_mode = 0
@@ -47,13 +48,13 @@ custom_minimum_size = Vector2(826, 534)
 layout_mode = 2
 color = Color(0.172549, 0.172549, 0.172549, 0.717647)
 
-[node name="ActionLabels" type="ColorRect" parent="ScrollContainer/ButtonsAndLabels"]
+[node name="ActionRefsAndLabels" type="ColorRect" parent="ScrollContainer/ButtonsAndLabels"]
 layout_mode = 0
 offset_right = 136.0
 offset_bottom = 536.0
 color = Color(0.133333, 0.164706, 0.184314, 0.717647)
 
-[node name="forward" type="Label" parent="ScrollContainer/ButtonsAndLabels/ActionLabels" node_paths=PackedStringArray("kb_binding_buttons", "ms_binding_buttons", "ct_binding_buttons")]
+[node name="forward" type="Label" parent="ScrollContainer/ButtonsAndLabels/ActionRefsAndLabels" node_paths=PackedStringArray("kb_binding_buttons", "ms_binding_buttons", "ct_binding_buttons")]
 layout_mode = 0
 offset_top = 24.0
 offset_right = 128.0
@@ -67,7 +68,7 @@ kb_binding_buttons = [NodePath("../../KeyboardSettings/Kb1"), NodePath("../../Ke
 ms_binding_buttons = [NodePath("../../MouseSettings/Ms1"), NodePath("../../MouseSettings/Ms2"), NodePath("../../MouseSettings/Ms3")]
 ct_binding_buttons = [NodePath("../../ControllerSettings/Ct1"), NodePath("../../ControllerSettings/Ct2"), NodePath("../../ControllerSettings/Ct3")]
 
-[node name="backward" type="Label" parent="ScrollContainer/ButtonsAndLabels/ActionLabels" node_paths=PackedStringArray("kb_binding_buttons", "ms_binding_buttons", "ct_binding_buttons")]
+[node name="backward" type="Label" parent="ScrollContainer/ButtonsAndLabels/ActionRefsAndLabels" node_paths=PackedStringArray("kb_binding_buttons", "ms_binding_buttons", "ct_binding_buttons")]
 layout_mode = 0
 offset_top = 112.0
 offset_right = 128.0
@@ -81,7 +82,7 @@ kb_binding_buttons = [NodePath("../../KeyboardSettings/Kb4"), NodePath("../../Ke
 ms_binding_buttons = [NodePath("../../MouseSettings/Ms4"), NodePath("../../MouseSettings/Ms5"), NodePath("../../MouseSettings/Ms6")]
 ct_binding_buttons = [NodePath("../../ControllerSettings/Ct4"), NodePath("../../ControllerSettings/Ct5"), NodePath("../../ControllerSettings/Ct6")]
 
-[node name="left" type="Label" parent="ScrollContainer/ButtonsAndLabels/ActionLabels" node_paths=PackedStringArray("kb_binding_buttons", "ms_binding_buttons", "ct_binding_buttons")]
+[node name="left" type="Label" parent="ScrollContainer/ButtonsAndLabels/ActionRefsAndLabels" node_paths=PackedStringArray("kb_binding_buttons", "ms_binding_buttons", "ct_binding_buttons")]
 layout_mode = 0
 offset_top = 200.0
 offset_right = 128.0
@@ -95,7 +96,7 @@ kb_binding_buttons = [NodePath("../../KeyboardSettings/Kb7"), NodePath("../../Ke
 ms_binding_buttons = [NodePath("../../MouseSettings/Ms7"), NodePath("../../MouseSettings/Ms8"), NodePath("../../MouseSettings/Ms9")]
 ct_binding_buttons = [NodePath("../../ControllerSettings/Ct7"), NodePath("../../ControllerSettings/Ct8"), NodePath("../../ControllerSettings/Ct9")]
 
-[node name="right" type="Label" parent="ScrollContainer/ButtonsAndLabels/ActionLabels" node_paths=PackedStringArray("kb_binding_buttons", "ms_binding_buttons", "ct_binding_buttons")]
+[node name="right" type="Label" parent="ScrollContainer/ButtonsAndLabels/ActionRefsAndLabels" node_paths=PackedStringArray("kb_binding_buttons", "ms_binding_buttons", "ct_binding_buttons")]
 layout_mode = 0
 offset_top = 288.0
 offset_right = 128.0

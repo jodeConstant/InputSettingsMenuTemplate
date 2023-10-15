@@ -2,6 +2,8 @@ extends InputSettingsButton
 
 class_name InputSettingsButtonMs
 
+# These can be changed to RichTextLabel type, or possibly a Sprite2D,
+# but then the text setting in _ready should be changed accordingly
 @onready var lbl_ctrl: Label = $Ctrl
 @onready var lbl_meta: Label = $Meta
 @onready var lbl_alt: Label = $Alt
@@ -25,8 +27,8 @@ func update_button_text():
 	else:
 		text = ""
 
-func reset_binding(update_text: bool = true, removing_duplicate: bool = false):
-	if not removing_duplicate:
+func reset_binding(update_text: bool = true, remove_event: bool = true):
+	if remove_event:
 		if not ms_event:
 			ms_event = InputEventMouseButton.new()
 			
@@ -83,8 +85,7 @@ func _set_binding():
 				new_input_code
 				)
 	
-	print_debug("new event:")
-	print_debug(ms_event)
+	print_debug("new event: %s" % ms_event)
 	
 	curr_input_code = new_input_code
 	
@@ -99,7 +100,7 @@ func _gui_input(event):
 			if reading:
 				
 				new_input_code = event.get_modifiers_mask() | event.button_index
-				print_debug("mouse input code is: %d" % new_input_code)
+#				print_debug("mouse input code is: %d" % new_input_code)
 				
 				reading = false
 				

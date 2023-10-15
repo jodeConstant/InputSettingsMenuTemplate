@@ -27,5 +27,5 @@ signal input_set(button)
 func update_button_text():
 	pass
 
-func reset_binding(update_text: bool = true, removing_duplicate: bool = false):
+func reset_binding(update_text: bool = true, remove_event: bool = true):
 	pass

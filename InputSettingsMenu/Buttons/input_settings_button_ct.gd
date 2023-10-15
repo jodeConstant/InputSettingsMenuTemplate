@@ -8,8 +8,8 @@ func update_button_text():
 	text = ("Button %d" % curr_input_code) \
 				if curr_input_code > -1 else ""
 
-func reset_binding(update_text: bool = true, removing_duplicate: bool = false):
-	if not removing_duplicate:
+func reset_binding(update_text: bool = true, remove_event: bool = true):
+	if remove_event:
 		if not ct_event:
 			ct_event = InputEventJoypadButton.new()
 			ct_event.button_index = curr_input_code as JoyButton
@@ -45,8 +45,14 @@ func _gui_input(event):
 					
 				new_input_code = event.button_index
 				
+				if new_input_code == curr_input_code:
+					print_debug(
+						"Attempted assigning same input, code: %d" % new_input_code
+						)
+					return
+				
 				ct_event = InputEventJoypadButton.new()
-				ct_event.button_index = new_input_code
+				ct_event.button_index = new_input_code as JoyButton
 				
 				InputMap.action_add_event(action_name, ct_event)
 				
@@ -55,9 +61,8 @@ func _gui_input(event):
 					str(30 + index), 
 					new_input_code
 					)
-		
-				print_debug("new event:")
-				print_debug(ct_event)
+				
+				print_debug("new event: %s" % ct_event)
 				
 				curr_input_code = new_input_code
 				

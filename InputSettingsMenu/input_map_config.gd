@@ -19,6 +19,7 @@ var configurable_actions: Array[StringName] \
 @onready var config_file: = ConfigFile.new()
 
 # 3 keys, mouse + key combinations and controller buttons
+# This should match the number of buttons of each type per action
 var MAX_PER_TYPE: int = 3
 
 # Remove if immediate initialization is not desirable:
@@ -26,26 +27,20 @@ func _ready():
 	initialize()
 
 func initialize():
-	if not config_file:
-		config_file = ConfigFile.new()
-		
-	if configurable_actions.is_empty():
-		configurable_actions = InputMap.get_actions().slice(76)
-	
-	if config_file.load(config_file_path) == OK:
-		_load_inputs()
-	else:# defaults
+	var error = _load_inputs()
+	if error:
+		_printout_file_error(error, true)
 		_save_current_inputmap()
 
 func restore_defaults():
 	InputMap.load_from_project_settings()
 	config_file.clear()
 	_save_current_inputmap()
-	save_settings()
 
 func save_settings():
-	var err: Error = config_file.save(config_file_path)
-	# TODO: signal save success
+	var error: Error = config_file.save(config_file_path)
+	if error:
+		_printout_file_error(error, false)
 
 func _save_current_inputmap():
 	print_debug("Saving InputMap to file")
@@ -55,7 +50,7 @@ func _save_current_inputmap():
 	var _e: InputEvent
 	var input_indices: Vector3i# x = key, y = mouse, z = controller / "joypad"
 	for a in configurable_actions:
-		print_debug("Saving action \"%s\" to config file:" % a)
+		print_debug("Saving action \"%s\" events to config file:" % a)
 		input_indices = Vector3i.ZERO
 		_events = InputMap.action_get_events(a)
 		for ev in _events:
@@ -89,11 +84,18 @@ func _save_current_inputmap():
 		print_debug("---------")
 	save_settings()
 
-func _load_inputs():
+func _load_inputs() -> Error:
+	var error = config_file.load(config_file_path)
+	if error:
+		return error
+	
 	print_debug("Loading input settings from file")
 	var keys: PackedStringArray
 	var read_val
+	if configurable_actions.is_empty():
+		configurable_actions = InputMap.get_actions().slice(76)
 	for a in configurable_actions:
+		print_debug("Loading action \"%s\" events from config file:" % a)
 		# no keys = no mapped inputs / input bindings
 		InputMap.action_erase_events(a)
 		if not config_file.has_section(a):
@@ -111,6 +113,7 @@ func _load_inputs():
 					int(read_val)
 					)
 		print_debug("---------")
+	return OK
 
 func _add_loaded_event(action: StringName, type: int, code: int):
 	if type == 3:
@@ -137,3 +140,13 @@ func _add_loaded_event(action: StringName, type: int, code: int):
 func _notification(what):
 	if what == NOTIFICATION_WM_CLOSE_REQUEST:
 		save_settings()
+
+func _printout_file_error(error: Error, on_load: bool):
+	match error:
+		FAILED:
+			print_debug("Error: undetermined error on %s" % ("load" if on_load else "save"))
+		ERR_FILE_CANT_OPEN:
+			print_debug("Error: can't open file on %s" % ("load" if on_load else "save"))
+		ERR_FILE_NOT_FOUND:
+			# Not necessarily an error per se
+			print_debug("File not found on %s" % ("load" if on_load else "save"))

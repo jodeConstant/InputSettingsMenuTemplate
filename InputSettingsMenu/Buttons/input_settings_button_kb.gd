@@ -2,6 +2,8 @@ extends InputSettingsButton
 
 class_name InputSettingsButtonKb
 
+# These can be changed to RichTextLabel type, or possibly a Sprite2D,
+# but then the text setting in _ready should be changed accordingly
 @onready var lbl_ctrl: Label = $Ctrl
 @onready var lbl_meta: Label = $Meta
 @onready var lbl_alt: Label = $Alt
@@ -9,9 +11,7 @@ class_name InputSettingsButtonKb
 
 var kb_event: InputEventKey
 
-# bits greatest to least significant: meta, alt, shift, ctrl
 var _key_bits: int
-var _mod_bits: int
 var key_label: int = 0
 
 func  _ready():
@@ -28,8 +28,8 @@ func update_button_text():
 	else:
 		text = ""
 
-func reset_binding(update_text: bool = true, removing_duplicate: bool = false):
-	if not removing_duplicate:
+func reset_binding(update_text: bool = true, remove_event: bool = true):
+	if remove_event:
 		if not kb_event:
 			kb_event = InputEventKey.new()
 			
@@ -112,9 +112,9 @@ func _gui_input(event):
 				
 				new_input_code = event.get_physical_keycode_with_modifiers()
 				_key_bits = new_input_code & KEY_CODE_MASK
-					
-				print_debug("read event key is: %s" % _key_bits)
-				print_debug("read event code: %d" % new_input_code)
+				
+#				print_debug("read event key is: %s" % _key_bits)
+#				print_debug("read event code: %d" % new_input_code)
 				
 				if (_key_bits != KEY_CTRL) and (_key_bits != KEY_SHIFT) \
 				and (_key_bits != KEY_ALT) and (_key_bits != KEY_META):
@@ -124,7 +124,7 @@ func _gui_input(event):
 				
 			else:# released; no non-mod key was pressed
 				# If key is Ctrl, no need to modify code modifier and key parts
-				print_debug("on-release code starts as: %d" % new_input_code)
+#				print_debug("on-release code starts as: %d" % new_input_code)
 				if (new_input_code & KEY_CODE_MASK) != KEY_CTRL:
 					# identify and remove primary key bits
 					# set equivalent modifier bit
@@ -137,7 +137,7 @@ func _gui_input(event):
 					# just clear all key bits
 					new_input_code = new_input_code & KEY_MODIFIER_MASK
 					
-					print_debug("on-release code after adjusting modifiers is: %d" % new_input_code)
+#					print_debug("on-release code after adjusting modifiers is: %d" % new_input_code)
 					
 					if new_input_code & KEY_MASK_CTRL:
 						new_input_code = new_input_code & (~KEY_MASK_CTRL)
@@ -156,7 +156,7 @@ func _gui_input(event):
 						new_input_code = new_input_code | KEY_SHIFT
 				
 				key_label = new_input_code & KEY_CODE_MASK
-				print_debug("on-release code ends up as: %d" % new_input_code)
+#				print_debug("on-release code ends up as: %d" % new_input_code)
 				release_focus()
 				#accept_event()
 				_set_binding()
