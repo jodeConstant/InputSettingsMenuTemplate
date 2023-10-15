@@ -1,4 +1,4 @@
-# Input Settings Menu and configuration template, WIP
+# Input Settings Menu and configuration template, WIP, Godot version 4.1.1
 
 This project contains a simple input customization interface that can be used for various games made in Godot. UI components purposefully do not require creation of new themes and should be fairly easy to add to a game project by copying the **InputSettingsMenu folder** to another project, and then modifying as desired.
 
