@@ -2,7 +2,7 @@ extends Label
 
 class_name ActionBindingRef
 
-@export var action_name: StringName
+var action_name: StringName
 
 @export var kb_binding_buttons: Array[InputSettingsButton]
 @export var ms_binding_buttons: Array[InputSettingsButton]

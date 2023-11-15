@@ -69,6 +69,18 @@ This script can also run a preliminary check to see if buttons for same action h
 
 The node used by default is a Label that should display the action / binding name to the user. However, none of the Label functionalities are required for the script to work, so this could well be changed to, for example, RichTextLabel, or something else entirely, but parts of the script would need to be modified or removed.
 
+#### action_binding_package scene
+
+This scene is a premade bundle of a node with a `ActionBindingRef` script and 3 of each type of input setting buttons. This lets you quickly add bundled input setting buttons for an action, with an `ActionBindingRef` that already has references set up.
+
+To move button around in hierarchy, make the scene local: this lets you move the buttons around as needed.
+
+**WARNING:** Duplicating `ActionBindingRef` nodes that are already made local will result in copies incorrectly having references to the same buttons as the original. Add new package scenes instead to have `ActionBindingRef`s have their own buttons and correct references.
+
+#### `grid_arranger` script
+
+This tool script can be used to quickly arrange labels and buttons in a neat list / grid, with specified spacings and start positions. The script is meant to be run in the editor: set the parameters and click the **Organize Buttons** property in the Inspector panel.
+
 ### Menu script
 
 Manages the general menu functionalities:
